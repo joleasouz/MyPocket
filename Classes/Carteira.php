@@ -8,17 +8,17 @@ class Carteira{
     private float $saldo = 0;
     private array $transacoes = [];
 
-    private function AdicionarReceita(Receita $receita){
-        $this->saldo = $receita->getValor();
+    public function adicionarReceita(Receita $receita){
+        $this->saldo += $receita->getValor();
         $this->transacoes[] = $receita;
     }
 
-    private function AdicionarDespesa(Despesa $despesa){
+    public function adicionarDespesa(Despesa $despesa){
         if($despesa->getValor() > $this->saldo){
-            throw new Exception("Erro! Não é possível cadastrar uma despesa maior que o saldo.");
+            throw new Exception("Não é possível cadastrar uma despesa maior que o saldo.");
         }
         else{
-            $this->saldo = $despesa->getValor();
+            $this->saldo -= $despesa->getValor();
             $this->transacoes[] = $despesa;
         }
     }

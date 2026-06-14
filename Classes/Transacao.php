@@ -6,7 +6,7 @@ abstract class Transacao{
     private string $data;
     private string $descricao;
 
-    public function __construct($valor, $data, $descricao){
+    public function __construct(float $valor, string $data, string $descricao){
         $this->valor = $valor;
         $this->data = $data;
         $this->descricao = $descricao;
