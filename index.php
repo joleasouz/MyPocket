@@ -28,6 +28,11 @@ $historico = $carteira->getTransacoes();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <?php if ($mensagem): ?>
+        <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin: 10px 0; border-radius: 5px;">
+            <?= $mensagem ?>
+        </div>
+    <?php endif; ?>
 
     <div class=saldo>
         <div class="card text-white bg-primary mb-4">
@@ -88,12 +93,15 @@ $historico = $carteira->getTransacoes();
                             $descricao = $transacao->getDescricao();
                             $tipo      = $transacao->VerificarTipo();
                             $valor     = number_format($transacao->getValor(), 2, ',', '.');
-
-                            echo "<tr>";
+                            
+                            $corLinha = ($tipo == 'Entrada') ? 'style="background-color: #76fa95;"' : 'style="background-color: #f77b86;"';
+                            $corValor = ($tipo == 'Entrada') ? 'style="color: #155724; font-weight: bold;"' : 'style="color: #721c24; font-weight: bold;"';
+                            
+                            echo "<tr $corLinha>";
                             echo "<td>" . $data . "</td>";
                             echo "<td>" . $descricao . "</td>";
                             echo "<td>" . $tipo . "</td>";
-                            echo "<td>R$ " . $valor . "</td>";
+                            echo "<td $corValor>R$ " . $valor . "</td>";
                             echo "</tr>";
                         }
                     ?>
